@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+    
+            display: flex;
+    
+            flex-direction: column;
+    
+            align-items: center
+        }
+    
+        .coin {
+    
+            width: 100px;
+    
+            height: 100px;
+    
+            border-radius: 50%;
+    
+            background: gold;
+    
+            line-height: 100px;
+    
+            text-align: center
+        }
+    
+        .heads {
+    
+            background: green;
+    
+            color: white
+        }
+    
+        .tails {
+    
+            background: red;
+    
+            color: white
+        }
+    </style>
+    
+    </head>
+    
+    <body>
+    
+        <div id="coin" class="coin">🪙</div>
+    
+        <p id="result"></p>
+    
+        <button id="flip-btn" onclick="flipCoin()">Flip Coin</button>
+</head>
+<body>
+    <script>
+
+        function flipCoin() {
+
+            let btn = document.getElementById("flip-btn");
+
+            let coin = document.getElementById("coin");
+
+            btn.disabled = true;
+
+            document.getElementById("result").textContent = "⏳ Flipping...";
+
+            coin.className = "coin";
+
+            void coin.offsetWidth;
+
+            let flip = new Promise(function (resolve, reject) {
+
+                setTimeout(function () {
+
+                    let isHeads = Math.random() < 0.5;
+
+                    coin.className = "coin " + (isHeads ? "heads" : "tails");
+
+                    if (isHeads) {
+
+                        resolve("HEADS — You Win!");
+
+                    } else {
+
+                        reject("TAILS — You Lose!");
+
+                    }
+
+                }, 900);
+
+            });
+
+            flip
+
+                .then(function (msg) {
+
+                    document.getElementById("result").textContent = msg;
+
+                })
+
+                .catch(function (msg) {
+
+                    document.getElementById("result").textContent = msg;
+
+                })
+
+                .finally(function () {
+
+                    btn.disabled = false;
+
+                });
+
+        }
+
+    </script>
+</body>
+</html>
